@@ -6,6 +6,8 @@ const checkId = (id: number,res:express.Response) => {
 }
 const validId = (id: number,res:express.Response) =>isNaN(id)?res.status(401).send("Enter valid id please !"):""
 export const getBooks = (req: Book.request, res: Book.response) => {
+   
+    
     let getBookData = bookData
     if (req.query.name) {
         getBookData = bookData.filter(book => book.title === req.query.name)
@@ -19,10 +21,24 @@ export const getBooks = (req: Book.request, res: Book.response) => {
             return res.status(404).send(`Book with publicationYear : ${req.query.publicationYear} not found`)
         }
     }
+    const sort = req.query.sort || "id";  
+    const sortedBooks = [...getBookData].sort((a, b) => {
+        if (sort === "title") {
+          return a.title.localeCompare(b.title);
+        } else if (sort === "author") {
+          return a.author.localeCompare(b.author);
+        } else if (sort === "publicationYear") {
+          return a.publicationYear - b.publicationYear;
+        } else {
+
+          return a.id - b.id;
+        }
+      });
+   
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 5;
-    const filterData = getBookData.slice((page - 1) * pageSize, pageSize * page)
-    res.send({ page: page, pageSize: pageSize, total: getBookData.length, books: filterData })
+    const filterData = sortedBooks.slice((page - 1) * pageSize, pageSize * page)
+    res.send({totalPages:Math.ceil(getBookData.length/(pageSize)), currentPage: page, pageSize: pageSize, total: getBookData.length, books: filterData })
 }
 
 export const getBookById = (req: express.Request, res: express.Response) => {

@@ -8,12 +8,13 @@ export interface Data{
 }
 export interface  request extends express.Request{
     body: Data,
-    query: {page:string,pageSize:string,name:string,publicationYear:string},
+    query: {page:string,pageSize:string,name:string,publicationYear:string,sort:string},
     
     }
 export interface response extends express.Response{
     send: (body: string | {
-        page: number,
+        totalPages:number
+        currentPage: number,
         pageSize: number,
         total: number,
         books: Array<Data>
