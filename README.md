@@ -34,7 +34,7 @@ The server will be running at `http://localhost:3000`.
 
 ## Sample Data
 
-The sample data for the books is available in the `books.ts` file within the repository. Here is the sample book data:
+The sample data for the books is available in the `bookData.ts` file within the repository. Here is the sample book data:
 
 ```typescript
 export default [
@@ -75,14 +75,14 @@ export default [
 - **Parameters:**
   - `page` (optional): The page number for pagination (default is 1).
   - `pageSize` (optional): The number of books to be returned per page (default is 5).
-- **Example Request:** `/api/books?page=1&pageSize=20`
+- **Example Request:** `/api/books?page=1&pageSize=10`
 - **Example Response:**
 
 ```json
 {
   "totalPages": 9,
   "currentPage": 1,
-  "pageSize": 5,
+  "pageSize": 10,
   "total":42,
   "books": [
     {
@@ -197,9 +197,6 @@ If no `sort` query parameter is provided, the API will default to sorting the bo
 
 The API is designed to handle appropriate status codes and error scenarios. If a request is made to a non-existing endpoint, the API will respond with a 404 Not Found status code. Additionally, specific error messages will be returned for various validation and handling errors, such as trying to retrieve a non-existing book or providing invalid data for book creation and update.
 
-## Testing with Postman
-
-You can use Postman to test the API endpoints. Import the provided `BookManagementAPI.postman_collection.json` into Postman to access the pre-configured requests.
 
 ## Conclusion
 
