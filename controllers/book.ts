@@ -1,11 +1,11 @@
 import express from 'express'
 import bookData from "../data/bookData.js";
-import Book from "../types/book.js";
+import NSBook from "../types/book.js";
 const checkId = (id: number,res:express.Response) => {
     return bookData.find(book => book.id === id) ? "" :res.status(404).send("not found Book with id: " + id);
 }
 const validId = (id: number,res:express.Response) =>isNaN(id)?res.status(401).send("Enter valid id please !"):""
-export const getBooks = (req: Book.request, res: Book.response) => {
+const getBooks = (req: NSBook.request, res: NSBook.response) => {
    
     
     let getBookData = bookData
@@ -41,7 +41,7 @@ export const getBooks = (req: Book.request, res: Book.response) => {
     res.send({totalPages:Math.ceil(getBookData.length/(pageSize)), currentPage: page, pageSize: pageSize, total: getBookData.length, books: filterData })
 }
 
-export const getBookById = (req: express.Request, res: express.Response) => {
+ const getBookById = (req: express.Request, res: express.Response) => {
     const id = parseInt(req.params.id);
     validId(id,res)
     checkId(id,res)
@@ -49,12 +49,12 @@ export const getBookById = (req: express.Request, res: express.Response) => {
     res.send(filterData)
 }
 
-export const postBook = (req: Book.request, res: express.Response) => {
+const postBook = (req: NSBook.request, res: express.Response) => {
     if (!req.body.title || !req.body.author || !req.body.publicationYear) {
         return res.status(400).send("invalid Requirement title and publicationYear and author must be specified")
         
     }
-    const newBook: Book.Data = {
+    const newBook: NSBook.Data = {
         id: bookData[bookData.length - 1].id + 1,
         author: req.body.author,
         publicationYear: req.body.publicationYear,
@@ -64,7 +64,7 @@ export const postBook = (req: Book.request, res: express.Response) => {
     res.status(201).send("Book added successfully")
 }
 
-export const updateBookById = (req: Book.request, res: express.Response) => {
+ const updateBookById = (req: NSBook.request, res: express.Response) => {
     const id = parseInt(req.params.id)
  validId(id,res)
  checkId(id,res)
@@ -82,7 +82,7 @@ export const updateBookById = (req: Book.request, res: express.Response) => {
     res.status(201).send("Book updated successfully")
 }
 
-export const deleteBookById = (req: express.Request, res: express.Response) => {
+const deleteBookById = (req: express.Request, res: express.Response) => {
  
     const id = parseInt(req.params.id)
     validId(id,res)
@@ -90,3 +90,4 @@ export const deleteBookById = (req: express.Request, res: express.Response) => {
     bookData.splice(id - 1, 1)
     res.status(201).send("Book with id:" + id + " deleted")
 }
+export default {getBookById,getBooks,deleteBookById,updateBookById,postBook}

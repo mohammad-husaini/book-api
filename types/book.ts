@@ -1,5 +1,5 @@
 import express from 'express';
-namespace Book {
+namespace NSBook {
 export interface Data{
     id: number,
     title: string,
@@ -22,4 +22,4 @@ export interface response extends express.Response{
     }
 }
 
-export default Book
+export default NSBook

@@ -1,11 +1,11 @@
 import express from 'express'
-import { deleteBookById, getBookById, getBooks, postBook, updateBookById } from '../controllers/book.js';
+import booksControllers from '../controllers/book.js';
 const router = express.Router();
 
-router.get('/',getBooks )
-router.get('/:id', getBookById );
-router.post('/',postBook );
-router.put('/:id',updateBookById)
-router.delete('/:id',deleteBookById )
+router.get('/',booksControllers.getBooks )
+router.get('/:id', booksControllers.getBookById );
+router.post('/',booksControllers.postBook );
+router.put('/:id',booksControllers.updateBookById)
+router.delete('/:id',booksControllers.deleteBookById )
 
 export default router;
