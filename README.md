@@ -201,3 +201,74 @@ The API is designed to handle appropriate status codes and error scenarios. If a
 ## Conclusion
 
 This Book Management System REST API provides a user-friendly interface for managing books effectively. The API's well-structured code and comprehensive documentation make it easy to integrate into your applications. Feel free to explore the API and leverage its capabilities to handle CRUD operations, search for books, and more.
+
+## Deployed in an Auto-Scaling Group behind an Application Load Balancer.(AWS)
+# Book Management System REST API
+
+This repository contains a Book Management System REST API built using Express.js and TypeScript. The API allows users to perform CRUD operations on books stored in a JSON file and provides additional functionality for querying books by name or publishing year.
+
+## Deployment Steps and Screenshots
+
+This section provides step-by-step instructions for deploying the Book Management app to AWS. Each step is accompanied by screenshots to help you visualize the process.
+
+## Step 1: Prepare Your Application
+
+### 1.Add health check to code 
+ 
+![Screenshot from 2023-08-20 10-59-42](https://github.com/mohammad-husaini/book-api/assets/125281502/eeeb4715-5520-46b2-869e-bba8d54a31c6)
+
+### 2.Add process.env.PORT
+
+![Screenshot from 2023-08-20 11-00-08](https://github.com/mohammad-husaini/book-api/assets/125281502/c2552556-4651-4140-b944-f86988a2f674)
+
+### 3.Add build command to pakeage.json 
+
+![Screenshot from 2023-08-20 11-10-19](https://github.com/mohammad-husaini/book-api/assets/125281502/dc9f3fc1-8c0d-4e6a-bda5-a783cbdb6512)
+
+### 4.run the command to build dist file
+
+![Screenshot from 2023-08-20 11-10-05](https://github.com/mohammad-husaini/book-api/assets/125281502/60a0ab1a-062e-4739-9d3e-8a4bf4c97b91)
+
+![Screenshot from 2023-08-20 14-18-21](https://github.com/mohammad-husaini/book-api/assets/125281502/32ab1819-7c9f-485b-ad42-47241d1ba117)
+
+### 5.compress the file using tar czvf app.tar.gz package.json package-lock.json dist/*
+
+![Screenshot from 2023-08-20 11-11-13](https://github.com/mohammad-husaini/book-api/assets/125281502/6448cdfb-396d-401b-aaf6-8318625d1b96)
+
+![Screenshot from 2023-08-20 11-12-29](https://github.com/mohammad-husaini/book-api/assets/125281502/2cbbf58b-acfa-40bf-96c0-28303193037a)
+
+
+## Step 2: Upload the compress file to GitHub
+
+### 1.Create a new relese 
+
+![Screenshot from 2023-08-20 11-27-11](https://github.com/mohammad-husaini/book-api/assets/125281502/78461986-9869-4d70-b17d-d10aae45de34)
+
+### 2.Create a new Tag (latest)
+
+
+![Screenshot from 2023-08-20 11-27-43](https://github.com/mohammad-husaini/book-api/assets/125281502/fca60cd9-8bb5-4236-8889-a1d36e116f7c)
+
+### 3.Upload the compress file to the relese 
+
+![Screenshot from 2023-08-20 11-28-36](https://github.com/mohammad-husaini/book-api/assets/125281502/bef7f4b2-fd11-42eb-84e7-9eb3c3f78912)
+
+### 4.publish relese
+
+![Screenshot from 2023-08-20 11-28-56](https://github.com/mohammad-husaini/book-api/assets/125281502/9fbfcd86-8d84-4658-874d-d4af402aa7a2)
+
+
+## Step 3: Create Auto Scaling Groups
+
+### 1.Select Auto scaling groups
+
+![Screenshot from 2023-08-20 11-34-30](https://github.com/mohammad-husaini/book-api/assets/125281502/35a5cb99-e1af-426c-a4a4-b87f9f219629)
+
+### 2.Create Auto scaling group
+
+![Screenshot from 2023-08-20 11-34-40](https://github.com/mohammad-husaini/book-api/assets/125281502/8bcf84dc-5468-4a97-a796-7abf0359649c)
+
+### 3.Enter a Name 
+
+
+
