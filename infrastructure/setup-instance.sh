@@ -19,6 +19,6 @@ sudo mv app.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable app.service
 
-sudo -u app sh -c "mkdir -p /home/ubuntu/app && cd /home/ubuntu/app && curl -LO $download_url && mv $asset_name app.tar.gz && tar xzvf app.tar.gz && npm install --omit=dev"
+sudo -u ubuntu sh -c "mkdir -p /home/ubuntu/app && cd /home/ubuntu/app && curl -LO $download_url && tar xzvf app.tar.gz && npm install --omit=dev"
 
 sudo reboot
