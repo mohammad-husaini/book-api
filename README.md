@@ -203,9 +203,6 @@ The API is designed to handle appropriate status codes and error scenarios. If a
 This Book Management System REST API provides a user-friendly interface for managing books effectively. The API's well-structured code and comprehensive documentation make it easy to integrate into your applications. Feel free to explore the API and leverage its capabilities to handle CRUD operations, search for books, and more.
 
 ## Deployed in an Auto-Scaling Group behind an Application Load Balancer.(AWS)
-# Book Management System REST API
-
-This repository contains a Book Management System REST API built using Express.js and TypeScript. The API allows users to perform CRUD operations on books stored in a JSON file and provides additional functionality for querying books by name or publishing year.
 
 ## Deployment Steps and Screenshots
 
