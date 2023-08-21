@@ -270,5 +270,138 @@ This section provides step-by-step instructions for deploying the Book Managemen
 
 ### 3.Enter a Name 
 
+![Screenshot from 2023-08-20 11-35-42](https://github.com/mohammad-husaini/book-api/assets/125281502/1ff8a4c9-71a1-40c2-abd0-82c97a332ff3)
+
+### 4.Create a Launch template
+
+![Screenshot from 2023-08-20 11-35-57](https://github.com/mohammad-husaini/book-api/assets/125281502/458471ad-82bc-4a02-aed9-0f551bf1a4b8)
+
+### 5.Enter the template name and the version of this template 
+
+![Screenshot from 2023-08-20 11-36-49](https://github.com/mohammad-husaini/book-api/assets/125281502/c9e8c7f3-623d-4bad-a2ce-fe4522fa5e1f)
+
+### 6.Select the OS And the cpu Architecture
+
+![Screenshot from 2023-08-20 11-37-30](https://github.com/mohammad-husaini/book-api/assets/125281502/ecaa8fd5-8e8a-4725-bee3-6956ee91a211)
+
+### 7.Select instance type
+
+![Screenshot from 2023-08-20 11-37-51](https://github.com/mohammad-husaini/book-api/assets/125281502/ed258dec-ddbc-485a-b494-0ce7364d3010)
+
+### 8.Create a key pair 
+
+![Screenshot from 2023-08-20 11-38-09](https://github.com/mohammad-husaini/book-api/assets/125281502/f5c06722-91d2-4725-a368-5f4af21d658c)
+
+![Screenshot from 2023-08-20 11-38-54](https://github.com/mohammad-husaini/book-api/assets/125281502/99ba8cee-5816-488e-9e9d-396628f2c15e)
+
+### 9.Create a security group 
+
+![Screenshot from 2023-08-20 11-44-18](https://github.com/mohammad-husaini/book-api/assets/125281502/de42e171-54ee-4325-8606-98e2fea8204c)
+
+### 10.Add rule for security group
+
+![Screenshot from 2023-08-20 11-44-41](https://github.com/mohammad-husaini/book-api/assets/125281502/c7378247-e5b5-4175-8c91-7db3b6f6bb5f)
+
+### 11.Upload the user data sh code 
+
+![Screenshot from 2023-08-20 11-46-41](https://github.com/mohammad-husaini/book-api/assets/125281502/c2ad5b7d-b7f8-428f-bf68-aad1d4147694)
+
+```bash
+#!/bin/sh
+set -e
+
+sudo apt update
+sudo apt upgrade -y
+
+# install nodejs repo
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+
+sudo apt install nodejs jq curl -y
+
+# deploy app
+repo="mohammad-husaini/book-api"
+download_url=$(curl "https://api.github.com/repos/$repo/releases/latest" | jq --raw-output '.assets[0].browser_download_url')
+asset_name=$(curl "https://api.github.com/repos/$repo/releases/latest" | jq --raw-output '.assets[0].name')
+
+curl -O "https://raw.githubusercontent.com/$repo/main/infrastructure/app.service"
+sudo mv app.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable app.service
+
+sudo -u ubuntu sh -c "mkdir -p /home/ubuntu/app && cd /home/ubuntu/app && curl -LO $download_url && tar xzvf app.tar.gz && npm install --omit=dev"
+
+sudo reboot
+```
+### 12.Create the launch template 
+
+![Screenshot from 2023-08-20 11-46-57](https://github.com/mohammad-husaini/book-api/assets/125281502/feea2e3e-0471-49ae-84b8-8cb72537f770)
+
+![Screenshot from 2023-08-20 11-47-24](https://github.com/mohammad-husaini/book-api/assets/125281502/f796d391-4a18-4d63-9a37-bfb67f5156f7)
+
+### 13.Back to auto scalling group and select our templet 
+
+![Screenshot from 2023-08-20 11-48-41](https://github.com/mohammad-husaini/book-api/assets/125281502/310ef4a6-d17b-45e5-863c-134055cf8a13)
+
+### 14.Select the Availability Zones and subnets
+
+![Screenshot from 2023-08-20 11-49-06](https://github.com/mohammad-husaini/book-api/assets/125281502/825d0ba2-7e09-4400-b11c-8f38690e8a71)
+
+### 15.show the instance type requirments 
+
+![Screenshot from 2023-08-20 11-49-28](https://github.com/mohammad-husaini/book-api/assets/125281502/b80e5d5b-9741-4e08-83bd-15815f8cdf11)
+
+### 16.Select the load balancing 
+
+![Screenshot from 2023-08-20 11-50-03](https://github.com/mohammad-husaini/book-api/assets/125281502/cf7e4d70-f814-4e95-8c07-ce5e81e18951)
+
+### 17.select load balancer scheme and Availability Zone 
+
+![Screenshot from 2023-08-20 11-50-50](https://github.com/mohammad-husaini/book-api/assets/125281502/bbd8beab-2e7e-4920-aab6-95ff5c8eed53)
+
+### 18.Select Create target group 
+
+![Screenshot from 2023-08-20 11-51-47](https://github.com/mohammad-husaini/book-api/assets/125281502/2c08f178-cd31-4841-ab46-b4a7bce1dfde)
+
+### 19.VPX options
+
+![Screenshot from 2023-08-20 11-51-59](https://github.com/mohammad-husaini/book-api/assets/125281502/a3f17978-dd7c-4e3e-ad4e-8bded7e24063)
+
+### 20.Enable Health checks
+
+![Screenshot from 2023-08-20 11-52-20](https://github.com/mohammad-husaini/book-api/assets/125281502/5f82a4cc-c20f-4906-a8e5-8367583db27f)
+
+### 21.Next
+
+![Screenshot from 2023-08-20 11-52-41](https://github.com/mohammad-husaini/book-api/assets/125281502/8742a521-902f-4cbd-bf8d-82a9ec826fa8)
+
+### 22.Configure group size and scaling policies (BOUNS)
+
+![Screenshot from 2023-08-20 11-53-14](https://github.com/mohammad-husaini/book-api/assets/125281502/1a8c33a3-c1d2-4541-af84-5ec2a4d925d1)
+![Screenshot from 2023-08-20 11-54-10](https://github.com/mohammad-husaini/book-api/assets/125281502/c24b25c2-5049-47a0-a6ca-5caa316ab603)\
+
+### 23.Next
+
+![Screenshot from 2023-08-20 11-54-32](https://github.com/mohammad-husaini/book-api/assets/125281502/125fd28d-6e3c-48c8-808c-567f1b5246e2)
+
+### 24.Next
+
+![Screenshot from 2023-08-20 11-54-46](https://github.com/mohammad-husaini/book-api/assets/125281502/d521e76e-52d7-4934-a843-b09057ece211)
+
+### 25.Next 
+
+![Screenshot from 2023-08-20 11-54-54](https://github.com/mohammad-husaini/book-api/assets/125281502/504372b0-a2fe-4278-9250-53c0a06f0743)
+
+### 26.Create Auto Scaling group
+
+![Screenshot from 2023-08-20 11-55-10](https://github.com/mohammad-husaini/book-api/assets/125281502/7bfec9ff-8405-4eed-8259-5275acc52947)
+
+### 27.Edit health check settings and add the path
+
+![Screenshot from 2023-08-20 13-16-49](https://github.com/mohammad-husaini/book-api/assets/125281502/b91c0700-9feb-462e-96fb-b625236ce6ca)
+
+### 28.Done Done the instanse is Healthy
+
+![Screenshot from 2023-08-20 13-24-02](https://github.com/mohammad-husaini/book-api/assets/125281502/7f8a1b1f-9a8d-4fee-b033-1c0967b435cf)
 
 
+## TNX <3
