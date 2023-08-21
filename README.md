@@ -362,7 +362,7 @@ sudo reboot
 
 ![Screenshot from 2023-08-20 11-51-47](https://github.com/mohammad-husaini/book-api/assets/125281502/2c08f178-cd31-4841-ab46-b4a7bce1dfde)
 
-### 19.VPX options
+### 19.VPC options
 
 ![Screenshot from 2023-08-20 11-51-59](https://github.com/mohammad-husaini/book-api/assets/125281502/a3f17978-dd7c-4e3e-ad4e-8bded7e24063)
 
